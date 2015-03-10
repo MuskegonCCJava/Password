@@ -49,7 +49,7 @@ public class passwordListener implements ActionListener {
 	
 	public boolean validate(final String password){
 		 
-		  match = pattern.matcher(passwordString); // Will match the string against the pattern 
+		  match = pattern.matcher(password); // Will match the string against the pattern 
 		  return match.matches(); // This is a boolean 
 
 	  }
