@@ -16,6 +16,7 @@ public class Password_Main extends  JFrame{
 			public void run() {
 				Password_Main frame = new Password_Main();
 				frame.setVisible(true);
+				// added a comment for demonstration
 				
 			}
 		});
