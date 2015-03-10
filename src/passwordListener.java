@@ -9,9 +9,9 @@ public class passwordListener implements ActionListener {
 
 	Client_Password_Service service = new Client_Password_Service();
 	private static final String passwordValidation = 
-           "((?=.*[a-zA-Z-0-9]).{6,10})";
+           "((?=.*\\d)(?=.*[a-zA-Z]).{6,10})";
 	
-	// (?=.*\d) # must contains one digit from 0-9
+	// (?=.*\\d) # must contains one digit from 0-9
 	// I changed to (?=.*[a-zA-Z-0-9]) will check for any letter and number 0-9
 	// ?= –> means apply the assertion condition, meaningless by itself, always work with other combination
 	
