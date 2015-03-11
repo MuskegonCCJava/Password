@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 public class passwordListener implements ActionListener {
 
 	Client_Password_Service service = new Client_Password_Service();
-	private static final String passwordValidation = 
-           "((?=.*\\d)(?=.*[a-zA-Z]).{6,10})";
+	private static final String passwordValidation = "((?=.*\\d)(?=.*[a-zA-Z]).{6,10})";
 	
+	// Regex
 	// (?=.*\\d) # must contains one digit from 0-9
 	// I changed to (?=.*[a-zA-Z-0-9]) will check for any letter and number 0-9
 	// ?= –> means apply the assertion condition, meaningless by itself, always work with other combination
@@ -20,25 +20,32 @@ public class passwordListener implements ActionListener {
 	
 	private String passwordString;
 	
+	private confirmPassword confirmPass = new confirmPassword(service);
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
 		
+		if(source == Password_Panel.submitButton)
+			{
 		
-		String password = Password_Panel.passwordfield.getText();
-		service.setPassword(password);
-		
-		passwordString = service.getPassword();
-		
-		validate(passwordString);
+				String password = Password_Panel.passwordfield.getText();
+				service.setPassword(password); 
+				
+				passwordString = service.getPassword();
+				
+				validate(passwordString);
+			}
 		
 		if(validate(passwordString) == true)
-		{
-			Password_Panel.passwordfield.setBorder(Borders.blackline);
-		}
+			{
+				Password_Panel.passwordfield.setBorder(Borders.blackline);
+			}
 		else if (validate(passwordString) == false)
-		{
-			Password_Panel.passwordfield.setBorder(Borders.redline);
-		}
+			{
+				Password_Panel.passwordfield.setBorder(Borders.redline);
+			}
+		
 		
 		
 	}
