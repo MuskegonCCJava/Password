@@ -1,6 +1,8 @@
 import java.awt.EventQueue;
+import java.util.Date;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class Password_Main extends  JFrame{
@@ -24,6 +26,10 @@ public class Password_Main extends  JFrame{
 	
 	public Password_Main()
 	{
+		Date todaysDate = new Date();
+		JOptionPane.showMessageDialog(null, ("Password program by Kyle Wolff and Brandon Vandermey " + todaysDate),"Date", JOptionPane.PLAIN_MESSAGE);
+		
+		
 		Password_Panel panel = new Password_Panel();
 		
 		getRootPane().setDefaultButton(Password_Panel.submitButton);
