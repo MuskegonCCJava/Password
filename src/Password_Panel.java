@@ -27,7 +27,7 @@ public class Password_Panel extends JPanel {
 	public Password_Panel()
 	{
 		setLayout(null);
-		setBackground(Color.decode("#FFCC99"));
+		setBackground(Color.decode("#FFD1A3"));
 		
 		password.setBounds(getX() + 170,getY() + 80, 200,20);
 		

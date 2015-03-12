@@ -3,6 +3,8 @@ import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 
 
 public class passwordListener implements ActionListener {
@@ -35,6 +37,11 @@ public class passwordListener implements ActionListener {
 				
 				validate(passwordString);
 				
+				String confirmPassword = Password_Panel.confirmfield.getText();
+				service.setConfirmpassword(confirmPassword);
+				
+				confirmString = service.getConfirmpassword();
+				
 				if(validate(passwordString) == true)
 					{
 						Password_Panel.password.setBounds(170, 80, 200, 20);
@@ -48,18 +55,24 @@ public class passwordListener implements ActionListener {
 					 	Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
 					 	Password_Panel.errorMessage.setVisible(true);
 						Password_Panel.password.setBounds(170, 25, 200,20);
+						Password_Panel.errorMessage.setBounds(90,35, 400,80);
 						Password_Panel.passwordfield.setBorder(Borders.redline);
 					}
-				
-				String confirmPassword = Password_Panel.confirmfield.getText();
-				service.setConfirmpassword(confirmPassword);
-				
-				confirmString = service.getConfirmpassword();
 				
 				if(confirmString.isEmpty())
 					{
 						// Do nothing 
 						Password_Panel.confirmfield.setBorder(Borders.blackline);
+						
+						if(validate(passwordString) == true)
+						{
+							Password_Panel.confirmfield.setBorder(Borders.redline);
+							errorMessages errorMessages = new errorMessages(validate(passwordString),confirmString.isEmpty(),Password_Panel.confirmfield.getBorder() );
+							Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
+							Password_Panel.password.setBounds(170, 45, 200,20);
+						 	Password_Panel.errorMessage.setVisible(true);
+						 	Password_Panel.errorMessage.setBounds(60,35, 400,80);
+						}
 
 					}
 				else if(!confirmString.equals(passwordString))
@@ -69,15 +82,21 @@ public class passwordListener implements ActionListener {
 						Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
 					 	Password_Panel.errorMessage.setVisible(true);
 					 	Password_Panel.password.setBounds(170, 25, 200,20);
+						Password_Panel.errorMessage.setBounds(90,35, 400,80);
 
 					}
 				else if(confirmString.equals(passwordString))
 					{
 						Password_Panel.confirmfield.setBorder(Borders.blackline);
 					}
+				
+				if(passwordString.equals(confirmString) && (!passwordString.isEmpty()))
+					{
+						JOptionPane.showMessageDialog(null,"<html><center>Passwords Match</center></html>","Passed", JOptionPane.INFORMATION_MESSAGE);
+					}
+				
+				}
 			}
-	
-	}
 	
 	public passwordListener() {
 		pattern = Pattern.compile(passwordValidation);
