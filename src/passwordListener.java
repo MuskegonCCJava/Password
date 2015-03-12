@@ -49,7 +49,7 @@ public class passwordListener implements ActionListener {
 					 	Password_Panel.errorMessage.setVisible(false);
 
 					}
-				else if (validate(passwordString) == false || passwordString.isEmpty())
+				else if (validate(passwordString) == false || passwordString.isEmpty() || confirmPassword != passwordString)
 					{
 					 	errorMessages errorMessages = new errorMessages(validate(passwordString));
 					 	Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
@@ -90,7 +90,8 @@ public class passwordListener implements ActionListener {
 						Password_Panel.confirmfield.setBorder(Borders.blackline);
 					}
 				
-				if(passwordString.equals(confirmString) && (!passwordString.isEmpty()))
+			
+				if(passwordString.equals(confirmString) && (!passwordString.isEmpty() && validate(passwordString) == true))
 					{
 						JOptionPane.showMessageDialog(null,"<html><center>Passwords Match</center></html>","Passed", JOptionPane.INFORMATION_MESSAGE);
 					}
