@@ -17,9 +17,12 @@ public class Password_Panel extends JPanel {
 	
 	public static JButton submitButton;
 	
-	private JLabel password = new JLabel("Password");
+	public static JLabel password = new JLabel("Password");
+	static JLabel errorMessage = new JLabel();
 	
 	private String passwordHint = "Password";
+	
+	private errorMessages error = new errorMessages();
 
 	public Password_Panel()
 	{
@@ -34,23 +37,23 @@ public class Password_Panel extends JPanel {
 		passwordfield.setEnabled(false);
 		passwordfield.setBorder(Borders.blackline);
 		passwordfield.addMouseListener(new mouseListener());
-		
-		
-		
+				
 		confirmfield = new JTextField();
 		confirmfield.setUI(new HintField("Confirm", color));
 		confirmfield.setEnabled(false);
 		confirmfield.setBounds(getX() + 100,getY() + 130, 200,20);
 		confirmfield.setBorder(Borders.blackline);
 		confirmfield.addMouseListener(new mouseListener());
-
 	
-		
-		
 		submitButton = new JButton("Submit");
 		submitButton.setBounds(getX() + 155 , getY() + 180, 100,30);
 		submitButton.addActionListener(new passwordListener());
 		
+		errorMessage.setBounds(90,35, 400,80);
+		errorMessage.setForeground(Color.red);
+		errorMessage.setVisible(false);
+		
+		add(errorMessage);
 		add(submitButton);
 		add(password);
 		add(passwordfield);
@@ -82,6 +85,7 @@ public class Password_Panel extends JPanel {
 
 			}
 		});
+	
 	}
 
 	

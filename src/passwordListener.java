@@ -19,9 +19,8 @@ public class passwordListener implements ActionListener {
 	private Matcher match; 
 	
 	private String passwordString;
-	
-	private confirmPassword confirmPass = new confirmPassword(service);
-	
+	private String confirmString;
+			
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -35,19 +34,49 @@ public class passwordListener implements ActionListener {
 				passwordString = service.getPassword();
 				
 				validate(passwordString);
+				
+				if(validate(passwordString) == true)
+					{
+						Password_Panel.password.setBounds(170, 80, 200, 20);
+						Password_Panel.passwordfield.setBorder(Borders.blackline);
+					 	Password_Panel.errorMessage.setVisible(false);
+
+					}
+				else if (validate(passwordString) == false || passwordString.isEmpty())
+					{
+					 	errorMessages errorMessages = new errorMessages(validate(passwordString));
+					 	Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
+					 	Password_Panel.errorMessage.setVisible(true);
+						Password_Panel.password.setBounds(170, 25, 200,20);
+						Password_Panel.passwordfield.setBorder(Borders.redline);
+					}
+				
+				String confirmPassword = Password_Panel.confirmfield.getText();
+				service.setConfirmpassword(confirmPassword);
+				
+				confirmString = service.getConfirmpassword();
+				
+				if(confirmString.isEmpty())
+					{
+						// Do nothing 
+						Password_Panel.confirmfield.setBorder(Borders.blackline);
+
+					}
+				else if(!confirmString.equals(passwordString))
+					{
+						Password_Panel.confirmfield.setBorder(Borders.redline);
+						errorMessages errorMessages = new errorMessages(validate(passwordString), confirmString.equals(passwordString));
+						Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
+					 	Password_Panel.errorMessage.setVisible(true);
+					 	Password_Panel.password.setBounds(170, 25, 200,20);
+
+					}
+				else if(confirmString.equals(passwordString))
+					{
+						Password_Panel.confirmfield.setBorder(Borders.blackline);
+					}
 			}
-		
-		if(validate(passwordString) == true)
-			{
-				Password_Panel.passwordfield.setBorder(Borders.blackline);
-			}
-		else if (validate(passwordString) == false)
-			{
-				Password_Panel.passwordfield.setBorder(Borders.redline);
-			}
-		
-		
-		
+	
 	}
 	
 	public passwordListener() {

@@ -35,7 +35,7 @@ public class HintField extends BasicTextFieldUI implements FocusListener{
         JTextComponent component = getComponent();
         if (component.getText().length() == 0 && !component.hasFocus()) {
             g.setColor(color);
-            int padding = (component.getHeight() - component.getFont().getSize()) / 2;
+            int padding = (component.getHeight() - component.getFont().getSize()) / 3;
             int inset = 3;
             g.drawString(password, inset, component.getHeight() - padding - inset);
         }
