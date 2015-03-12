@@ -26,9 +26,11 @@ public class Password_Main extends  JFrame{
 	{
 		Password_Panel panel = new Password_Panel();
 		
+		getRootPane().setDefaultButton(Password_Panel.submitButton);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(width, height);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		
 		add(panel);
 		

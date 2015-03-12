@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 public class passwordListener implements ActionListener {
 
 	Client_Password_Service service = new Client_Password_Service();
-	private static final String passwordValidation = 
-           "((?=.*\\d)(?=.*[a-zA-Z]).{6,10})";
+	private static final String passwordValidation = "((?=.*\\d)(?=.*[a-zA-Z]).{6,10})";
 	
+	// Regex
 	// (?=.*\\d) # must contains one digit from 0-9
 	// I changed to (?=.*[a-zA-Z-0-9]) will check for any letter and number 0-9
 	// ?= –> means apply the assertion condition, meaningless by itself, always work with other combination
@@ -19,28 +19,64 @@ public class passwordListener implements ActionListener {
 	private Matcher match; 
 	
 	private String passwordString;
-	
+	private String confirmString;
+			
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
 		
+		if(source == Password_Panel.submitButton)
+			{
 		
-		String password = Password_Panel.passwordfield.getText();
-		service.setPassword(password);
-		
-		passwordString = service.getPassword();
-		
-		validate(passwordString);
-		
-		if(validate(passwordString) == true)
-		{
-			Password_Panel.passwordfield.setBorder(Borders.blackline);
-		}
-		else if (validate(passwordString) == false)
-		{
-			Password_Panel.passwordfield.setBorder(Borders.redline);
-		}
-		
-		
+				String password = Password_Panel.passwordfield.getText();
+				service.setPassword(password); 
+				
+				passwordString = service.getPassword();
+				
+				validate(passwordString);
+				
+				if(validate(passwordString) == true)
+					{
+						Password_Panel.password.setBounds(170, 80, 200, 20);
+						Password_Panel.passwordfield.setBorder(Borders.blackline);
+					 	Password_Panel.errorMessage.setVisible(false);
+
+					}
+				else if (validate(passwordString) == false || passwordString.isEmpty())
+					{
+					 	errorMessages errorMessages = new errorMessages(validate(passwordString));
+					 	Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
+					 	Password_Panel.errorMessage.setVisible(true);
+						Password_Panel.password.setBounds(170, 25, 200,20);
+						Password_Panel.passwordfield.setBorder(Borders.redline);
+					}
+				
+				String confirmPassword = Password_Panel.confirmfield.getText();
+				service.setConfirmpassword(confirmPassword);
+				
+				confirmString = service.getConfirmpassword();
+				
+				if(confirmString.isEmpty())
+					{
+						// Do nothing 
+						Password_Panel.confirmfield.setBorder(Borders.blackline);
+
+					}
+				else if(!confirmString.equals(passwordString))
+					{
+						Password_Panel.confirmfield.setBorder(Borders.redline);
+						errorMessages errorMessages = new errorMessages(validate(passwordString), confirmString.equals(passwordString));
+						Password_Panel.errorMessage.setText(errorMessages.getErrorMessage());
+					 	Password_Panel.errorMessage.setVisible(true);
+					 	Password_Panel.password.setBounds(170, 25, 200,20);
+
+					}
+				else if(confirmString.equals(passwordString))
+					{
+						Password_Panel.confirmfield.setBorder(Borders.blackline);
+					}
+			}
+	
 	}
 	
 	public passwordListener() {
