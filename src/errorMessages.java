@@ -1,3 +1,5 @@
+//	errorMessages.java by Kyle Wolff and Brandon VanderMey on 3/12/2015
+
 import javax.swing.border.Border;
 
 

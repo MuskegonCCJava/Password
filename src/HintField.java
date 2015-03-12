@@ -1,3 +1,5 @@
+//	HintField.java by Kyle Wolff and Brandon VanderMey on 3/12/2015
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.FocusEvent;
