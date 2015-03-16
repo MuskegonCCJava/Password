@@ -1,3 +1,5 @@
+//	passwordListener.java by Kyle Wolff and Brandon VanderMey on 3/12/2015
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;

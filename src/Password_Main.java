@@ -1,3 +1,5 @@
+//	Password_Main.java by Kyle Wolff and Brandon VanderMey on 3/12/2015
+
 import java.awt.EventQueue;
 import java.util.Date;
 
